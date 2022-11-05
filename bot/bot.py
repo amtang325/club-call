@@ -22,7 +22,7 @@ def addClub(category, name, id, icon):
     # shouldn't ever happen lol
     if category not in CATEGORIES:
         print(category, "not a valid category for club", name)
-        return 1
+        return
     
     db.collection('clubs').document(id).set({
         "category": category,
@@ -35,7 +35,12 @@ def addAnnouncement(id, text):
     doc = db.collection("clubs").document(id)
 
     if doc.get().exists:
-        doc.collection("announcements").add({
+        data = doc.get().to_dict()
+
+        db.collection("announcements").add({
+            "name": data["name"],
+            "icon": data["icon"],
+            "type": data["category"],
             "text": text,
             "time": int(time.time())
         })
