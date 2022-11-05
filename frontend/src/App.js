@@ -1,10 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'; 
 import './App.css';
-import Club from './Club';
-import ClubList from "./ClubList";
+import Announcements from "./Announcements";
 
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
+
+import { Image, Container } from '@chakra-ui/react'
+
+import MathBG from './math.png'
 
 const LOCAL_STORAGE_KEY = 'clubApp.clubs'
 
@@ -42,12 +45,18 @@ function App() {
   return (
     <>
       <div className="navigation-bar">
-        <a href="" id = "club-list-tab">Club List</a>
-        <a href="" id = "my-schedule-tab">My Schedule</a>
+        <a href="" id="club-list-tab">
+          Club List
+        </a>
+        <a href="#" id="my-schedule-tab">
+          My Schedule
+        </a>
       </div>
-      <ClubList clubs={clubs} />
+      <Container>
+        <Announcements clubs={clubs} />
+      </Container>
     </>
-  )
+  );
 }
 
 export default App;
