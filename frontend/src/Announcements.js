@@ -1,9 +1,9 @@
 import Announcement from './Announcement'
 
-export default function Announcements({clubs}) {
+export default function Announcements({announcements}) {
     return (
-        clubs.map(club => {
-            return <Announcement key={club.time} club={club} />;
+        announcements.map(announcement => {
+            return <Announcement key={announcement.time} club={announcement} />;
         })
     )
 }
