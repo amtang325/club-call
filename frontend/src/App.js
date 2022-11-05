@@ -12,8 +12,16 @@ function App() {
   return (
     <>
       <div class="navigation-bar">
-        <a href="" id = "club-list-tab">Club List</a>
-        <a href="" id = "my-schedule-tab">My Schedule</a>
+        <a href="" id = "club-list-tab">Announcement Board</a>
+      </div>
+      <label>Category</label>
+      <div>
+      <select class="select">
+        <input type = "checkbox"></input>
+        <option value="1"><input type = "checkbox"></input>Academic</option>
+        <input type = "checkbox"></input>
+        <option value="2">Sport</option>
+      </select>
       </div>
       <ClubList clubs={clubs} />
     </>
