@@ -42,21 +42,66 @@ function App() {
     a()
   }, [])
 
+  const handleAcademic = () => {
+    console.log('clicked academic');
+  };
+
+  const handleActivism = () => {
+    console.log('clicked activism');
+  };
+
+  const handleArts = () => {
+    console.log('clicked arts');
+  };
+
+  const handleCultural = () => {
+    console.log('clicked cultural');
+  };
+
+  const handleSocial = () => {
+    console.log('clicked social');
+  };
+
+  const handleSports = () => {
+    console.log('clicked sports');
+  };
+
+  const handleVolunteering = () => {
+    console.log('clicked volunteering');
+  };
+
+  const handleOther = () => {
+    console.log('clicked other');
+  };
+
+  const myFunction =() => {
+    var category = document.getElementById("club-categories").value; 
+    console.log('I changed!', category);
+  }
+
   return (
     <>
       <div className="navigation-bar">
         <a href="" id="club-list-tab">
-          Club List
-        </a>
-        <a href="#" id="my-schedule-tab">
-          My Schedule
+          Club Announcement Board
         </a>
       </div>
+      <select id = "club-categories" onChange={myFunction}>
+        <option>Filter by Category</option>
+        <option value="academic">Academic</option>
+        <option value="activism">Activism</option>
+        <option value="arts">Arts</option>
+        <option value="cultural">Cultural</option>
+        <option value="social">Social</option>
+        <option value="sports">Sports</option>
+        <option value="volunteering">Volunteering</option>
+        <option value="other">Other</option>
+      </select>
       <Container>
         <Announcements clubs={clubs} />
       </Container>
     </>
   );
-}
+};
 
 export default App;
