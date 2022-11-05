@@ -3,25 +3,47 @@ import './App.css';
 import Club from './Club';
 import ClubList from "./ClubList";
 
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+
 const LOCAL_STORAGE_KEY = 'clubApp.clubs'
 
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBIfhZqi02ojiVSPNUkw3dsAeAuo59Kw88",
+  authDomain: "club-call.firebaseapp.com",
+  projectId: "club-call",
+  storageBucket: "club-call.appspot.com",
+  messagingSenderId: "965696944593",
+  appId: "1:965696944593:web:29f5ead47b484a585808f0"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 function App() {
-  const [clubs, setClubs] =  useState([{'id': 1, 'name': 'Cybersecurity Club', 'message': 'Meeting today in Room 314'}, {'id': 2, 'name': 'Computer Team', 'message': 'Meeting today in Room 328. There will be candy!'}])
-  const clubNameRef = useRef()
+  const [clubs, setClubs] =  useState([])
+
+  useEffect(() => {
+    async function a () {
+      const querySnapshot = await getDocs(collection(db, "announcements"));
+
+      const clubsRead = querySnapshot.docs.map((doc) => doc.data());
+
+      console.log(clubsRead)
+
+      setClubs(clubsRead)
+
+    }
+    a()
+  }, [])
 
   return (
     <>
-      <div class="navigation-bar">
-        <a href="" id = "club-list-tab">Announcement Board</a>
-      </div>
-      <label>Category</label>
-      <div>
-      <select class="select">
-        <input type = "checkbox"></input>
-        <option value="1"><input type = "checkbox"></input>Academic</option>
-        <input type = "checkbox"></input>
-        <option value="2">Sport</option>
-      </select>
+      <div className="navigation-bar">
+        <a href="" id = "club-list-tab">Club List</a>
+        <a href="" id = "my-schedule-tab">My Schedule</a>
       </div>
       <ClubList clubs={clubs} />
     </>

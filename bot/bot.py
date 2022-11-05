@@ -18,15 +18,16 @@ db = firestore.client()
 
 CATEGORIES = ['academic', 'activism', 'arts', 'cultural', 'social', 'sports', 'volunteering', 'other']
 
-def addClub(category, name, id):
+def addClub(category, name, id, icon):
     # shouldn't ever happen lol
     if category not in CATEGORIES:
         print(category, "not a valid category for club", name)
-        return 1
+        return
     
     db.collection('clubs').document(id).set({
         "category": category,
-        "name": name
+        "name": name,
+        "icon": icon
     })
 
 
@@ -34,7 +35,12 @@ def addAnnouncement(id, text):
     doc = db.collection("clubs").document(id)
 
     if doc.get().exists:
-        doc.collection("announcements").add({
+        data = doc.get().to_dict()
+
+        db.collection("announcements").add({
+            "name": data["name"],
+            "icon": data["icon"],
+            "type": data["category"],
             "text": text,
             "time": int(time.time())
         })
@@ -107,7 +113,12 @@ async def on_guild_join(guild):
         await guild.owner.send('Alright. If you ever want to add your club, just kick and add me again!')
         return
 
-    addClub(emojiMapping[str(reaction.emoji)], guild.name, str(guild.id))
+    iconUrl = ""
+
+    if guild.icon:
+        iconUrl = guild.icon.url
+
+    addClub(emojiMapping[str(reaction.emoji)], guild.name, str(guild.id), str(iconUrl))
 
     await guild.owner.send(f"Added `{guild.name}` as a club! {str(reaction.emoji)}\n\nPlease make sure to give the `clubcall-announcer` role to anybody who you would like to be able to post announcements, and add ClubCall as a pingable member")
 
