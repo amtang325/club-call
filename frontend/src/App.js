@@ -42,39 +42,7 @@ function App() {
     a()
   }, [])
 
-  const handleAcademic = () => {
-    console.log('clicked academic');
-  };
-
-  const handleActivism = () => {
-    console.log('clicked activism');
-  };
-
-  const handleArts = () => {
-    console.log('clicked arts');
-  };
-
-  const handleCultural = () => {
-    console.log('clicked cultural');
-  };
-
-  const handleSocial = () => {
-    console.log('clicked social');
-  };
-
-  const handleSports = () => {
-    console.log('clicked sports');
-  };
-
-  const handleVolunteering = () => {
-    console.log('clicked volunteering');
-  };
-
-  const handleOther = () => {
-    console.log('clicked other');
-  };
-
-  const myFunction =() => {
+  const handleSelectCategory =() => {
     var category = document.getElementById("club-categories").value; 
     console.log('I changed!', category);
   }
@@ -86,7 +54,7 @@ function App() {
           Club Announcement Board
         </a>
       </div>
-      <select id = "club-categories" onChange={myFunction}>
+      <select id = "club-categories" onChange={handleSelectCategory}>
         <option>Filter by Category</option>
         <option value="academic">Academic</option>
         <option value="activism">Activism</option>
