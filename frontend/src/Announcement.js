@@ -2,20 +2,6 @@ import React from 'react'
 
 import { Box, Image, Badge, Flex, Heading } from '@chakra-ui/react'
 
-
-//   <div className="club">
-//     <h1 className="club-name">
-//       <img
-//         style={{ borderRadius: "50%", height: 50, width: 50 }}
-//         src={club.icon}
-//         alt=""
-//       />
-//       {club.name}
-//     </h1>
-//     <p className="message">{club.text}</p>
-//     <button id="add-club"> + </button>
-//   </div>
-
 const badges = {
     "academic": "pink",
     "activism": "red",
@@ -27,7 +13,7 @@ const badges = {
     "other": "lavender"
 }
 
-export default function Club({ club }) {
+export default function Announcement({ announcement }) {
     return (
       <Flex
         maxW="lg"
@@ -40,25 +26,25 @@ export default function Club({ club }) {
         height="100px"
       >
         <Box>
-          <Image src={club.icon} style={{ height: '100px' }} />
+          <Image src={announcement.icon} style={{ height: '100px' }} />
         </Box>
         <Box>
           <Box>
             <Badge
               borderRadius="full"
               px="2"
-              colorScheme={badges[club.type] || "gray"}
+              colorScheme={badges[announcement.type] || "gray"}
             >
-              {club.type}
+              {announcement.type}
             </Badge>
             <Heading
               as="h5"
               size="sm"
             >
-              {club.name}
+              {announcement.name}
             </Heading>
           </Box>
-          <Box>{club.text}</Box>
+          <Box>{announcement.text}</Box>
         </Box>
       </Flex>
     );

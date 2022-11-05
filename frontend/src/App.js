@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'; 
 import './App.css';
 import Announcements from "./Announcements";
+import Announcement from './Announcement'
 
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
@@ -9,7 +10,7 @@ import { Image, Container } from '@chakra-ui/react'
 
 import MathBG from './math.png'
 
-const LOCAL_STORAGE_KEY = 'clubApp.clubs'
+const LOCAL_STORAGE_KEY = 'announcementApp.announcements'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -26,58 +27,31 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 function App() {
-  const [clubs, setClubs] =  useState([])
+  const [announcements, setAnnouncements] =  useState([])
 
   useEffect(() => {
     async function a () {
       const querySnapshot = await getDocs(collection(db, "announcements"));
 
-      const clubsRead = querySnapshot.docs.map((doc) => doc.data());
+      const announcementsRead = querySnapshot.docs.map((doc) => doc.data());
 
-      console.log(clubsRead)
+      console.log(announcementsRead)
 
-      setClubs(clubsRead)
+      setAnnouncements(announcementsRead)
 
     }
     a()
   }, [])
 
-  const handleAcademic = () => {
-    console.log('clicked academic');
-  };
-
-  const handleActivism = () => {
-    console.log('clicked activism');
-  };
-
-  const handleArts = () => {
-    console.log('clicked arts');
-  };
-
-  const handleCultural = () => {
-    console.log('clicked cultural');
-  };
-
-  const handleSocial = () => {
-    console.log('clicked social');
-  };
-
-  const handleSports = () => {
-    console.log('clicked sports');
-  };
-
-  const handleVolunteering = () => {
-    console.log('clicked volunteering');
-  };
-
-  const handleOther = () => {
-    console.log('clicked other');
-  };
-
-  const myFunction =() => {
+  const handleSelectCategory =() => {
     var category = document.getElementById("club-categories").value; 
-    console.log('I changed!', category);
-  }
+    if (category === "") {
+    }
+    for (var i = 0; i < announcements.length; i++) {
+      if (announcements[i].category === category) {
+      }
+    }
+    }
 
   return (
     <>
@@ -86,8 +60,11 @@ function App() {
           Club Announcement Board
         </a>
       </div>
-      <select id = "club-categories" onChange={myFunction}>
-        <option>Filter by Category</option>
+      <div>
+        <label for = "club-categories">Filter by Category:</label>
+      </div>
+      <select id = "club-categories" onChange={handleSelectCategory}>
+        <option></option>
         <option value="academic">Academic</option>
         <option value="activism">Activism</option>
         <option value="arts">Arts</option>
@@ -98,7 +75,7 @@ function App() {
         <option value="other">Other</option>
       </select>
       <Container>
-        <Announcements clubs={clubs} />
+        <Announcements announcements={announcements} />
       </Container>
     </>
   );
