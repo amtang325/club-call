@@ -54,8 +54,9 @@ function App() {
           Club Announcement Board
         </a>
       </div>
+      <label for = "club-categories">Filter by Category:</label>
       <select id = "club-categories" onChange={handleSelectCategory}>
-        <option>Filter by Category</option>
+        <option></option>
         <option value="academic">Academic</option>
         <option value="activism">Activism</option>
         <option value="arts">Arts</option>
