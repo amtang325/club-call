@@ -16,7 +16,7 @@ app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 
-CATEGORIES = ['academic', 'sports', 'other']
+CATEGORIES = ['academic', 'activism', 'arts', 'cultural', 'social', 'sports', 'volunteering', 'other']
 
 def addClub(category, name, id):
     # shouldn't ever happen lol
@@ -80,20 +80,25 @@ async def on_message(message):
 
 @client.event
 async def on_guild_join(guild):
-    ACADEMIC, SPORT, OTHER, NO = "📚", "🏀", "❓", "❌"
+    ACADEMIC, ACTIVISM, ARTS, CULTURAL, SOCIAL, SPORT, VOLUNTEERING, OTHER, NO = "📚", "🌲", "🎨", "🏮", "🎉", "🏀", "😊", "❓", "❌"
     emojiMapping = {
         ACADEMIC: "academic",
+        ACTIVISM: "activism",
+        ARTS: "arts",
+        CULTURAL: "cultural",
+        SOCIAL: "social",
         SPORT: "sport",
+        VOLUNTEERING: "volunteering",
         OTHER: "other"
     }
 
-    message = await guild.owner.send(f"""Hey! Thanks for adding ClubCall.\n\nReact with the type of club `{guild.name}` is:\n{ACADEMIC}: Academic clubs\n{SPORT}: Sports clubs\n{OTHER}: Other clubs\n{NO}: Cancel operation""")
+    message = await guild.owner.send(f"""Hey! Thanks for adding ClubCall.\n\nReact with the type of club `{guild.name}` is:\n{ACADEMIC}: Academic clubs\n{ACTIVISM}: Activist clubs\n{ARTS}: Art clubs\n{CULTURAL}: Cultural clubs\n{SOCIAL}: Social clubs\n{SPORT}: Sports clubs\n{VOLUNTEERING}: Volunteering\n{OTHER}: Other clubs\n{NO}: Cancel operation""")
 
-    for e in [ACADEMIC, SPORT, OTHER, NO]:
+    for e in [ACADEMIC, ACTIVISM, ARTS, CULTURAL, SOCIAL, SPORT, VOLUNTEERING, OTHER, NO]:
         await message.add_reaction(e)
 
     try:
-        reaction = await client.wait_for('raw_reaction_add', timeout=300, check=lambda reaction: reaction.user_id == guild.owner.id and str(reaction.emoji) in [ACADEMIC, SPORT, OTHER] and reaction.message_id == message.id)
+        reaction = await client.wait_for('raw_reaction_add', timeout=300, check=lambda reaction: reaction.user_id == guild.owner.id and str(reaction.emoji) in [ACADEMIC, ACTIVISM, ARTS, CULTURAL, SOCIAL, SPORT, VOLUNTEERING, OTHER] and reaction.message_id == message.id)
     except asyncio.TimeoutError:
         await guild.owner.send('Timed out waiting for a response. If you ever want to add your club, just kick and add me again!')
         return
