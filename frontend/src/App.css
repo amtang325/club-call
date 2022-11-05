@@ -1,29 +1,27 @@
+body, html {
+  height: 100%;
+}
+
 body {
-  background-color:turquoise;
+  background-image: url(math.png);
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color:lavender;
 }
 
 .navigation-bar {
   text-align:left;
-  /*background-color:#FF731D;*/
-  padding: 15px 0px;
-}
-
-
-.logo{
-  height: 60px;
-  width: 60px;
-  object-fit: cover;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-right: 0px;
-  margin-left: 20px;
+  background-color:coral;
+  padding: 27px 0px;
 }
 
 .navigation-bar a {
   color:white;
   font-size:20px;
   font-family:"Anton", Sans Serif;
-  padding:15px 20px;
+  padding:27px 20px;
   text-align: center;
   text-decoration:none;
   font-weight: bold;
@@ -35,37 +33,42 @@ body {
   color:white;
 }
 
-button {
-    background-color: transparent;
-    border:2px solid white;
-    padding: 5px 7px;
-    width: 160px;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    left: 50%;
-    font-family:Arial, Helvetica, serif;
+.club {
+  height: 150px;
+  width: 450px;
+  border-style:solid;
+  margin: 25px 15px;
+  background-color:rgb(188, 188, 252);
+  border-radius: 20px;
 }
 
 .club-name {
-  font-size:18px;
+  background-color:rgb(132, 132, 255);
+  border-radius: 20px 20px 0px 0px;
+  margin: 0px;
+  padding: 10px;
+  font-size:20px;
+  text-align:center;
 }
 
 .message {
-  font-size:14px;
+  font-size:16px;
   display: inline;
+  margin: 15px;
 }
 
 button {
+  align:left;
   background-color: transparent;
   border:2px solid white;
-  margin: 0px 10px;
+  margin: 10px;
   width: 30px;
   height: 30px;
   text-align: center;
   color: white;
   font-size: 16px;
   border-radius:50%;
+  float: right;
 }
 
 button:hover {
