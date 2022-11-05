@@ -17,9 +17,14 @@ import { Box, Image, Badge, Flex, Heading } from '@chakra-ui/react'
 //   </div>
 
 const badges = {
-    "academic": "teal",
+    "academic": "pink",
+    "activism": "red",
+    "arts": "coral",
+    "cultural": "orange",
+    "social": "yellow",
     "sports": "green",
-    "other": "pink"
+    "volunteering": "teal",
+    "other": "lavender"
 }
 
 export default function Club({ club }) {
