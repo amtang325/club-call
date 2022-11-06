@@ -5,12 +5,12 @@ import { Box, Image, Badge, Flex, Heading } from '@chakra-ui/react'
 const badges = {
     "academic": "pink",
     "activism": "red",
-    "arts": "coral",
-    "cultural": "orange",
+    "arts": "orange",
+    "cultural": "purple",
     "social": "yellow",
     "sports": "green",
     "volunteering": "teal",
-    "other": "lavender"
+    "other": "blue"
 }
 
 // https://stackoverflow.com/questions/847185/convert-a-unix-timestamp-to-time-in-javascript
