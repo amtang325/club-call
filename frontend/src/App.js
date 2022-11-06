@@ -7,8 +7,6 @@ import "./App.css"
 import Home from './Home'
 import Dashboard from "./Dashboard";
 
-const LOCAL_STORAGE_KEY = "announcementApp.announcements";
-
 // Your web app's Firebase configuration
 
 function App() {
