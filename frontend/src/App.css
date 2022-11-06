@@ -9,6 +9,7 @@ body {
   background-repeat: no-repeat !important;
   background-size: cover !important;
   background-color:lavender !important;
+  width: 100vw;
 }
 
 .navigation-bar {

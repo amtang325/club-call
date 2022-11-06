@@ -6,9 +6,11 @@ import Announcement from './Announcement'
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
-import { Image, Container } from '@chakra-ui/react'
+import { Image, Container, Box, Flex } from '@chakra-ui/react'
 
 import MathBG from './math.png'
+
+import { MultiSelect } from "react-multi-select-component";
 
 const LOCAL_STORAGE_KEY = 'announcementApp.announcements'
 
@@ -26,8 +28,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const options = [
+  { label: "Academic", value: "academic" },
+  { label: "Activism", value: "activism" },
+  { label: "Arts", value: "arts" },
+  { label: "Cultural", value: "cultural" },
+  { label: "Social", value: "social" },
+  { label: "Sports", value: "sports" },
+  { label: "Volunteering", value: "volunteering" },
+  { label: "Other", value: "other" },
+];
+
+
 function App() {
   const [announcements, setAnnouncements] =  useState([])
+  const [announcementsToDisplay, setAnnouncementsToDisplay] = useState([])
+  const [tags, setTags] = useState(options)
 
   useEffect(() => {
     async function a () {
@@ -43,15 +59,29 @@ function App() {
     a()
   }, [])
 
-  const handleSelectCategory =() => {
-    var category = document.getElementById("club-categories").value; 
-    if (category === "") {
-    }
-    for (var i = 0; i < announcements.length; i++) {
-      if (announcements[i].category === category) {
-      }
-    }
-    }
+  useEffect(() => {
+    console.log(tags)
+    setAnnouncementsToDisplay(announcements.filter(e => {
+      console.log(tags)
+        for(let val of tags){
+          console.log(val)
+          if (val.value == e.type) return true
+        }
+
+        return false
+      })
+    )
+  }, [announcements, tags])
+
+  const handleSelectCategory = () => {
+    // var category = document.getElementById("club-categories").value; 
+    // if (category === "") {
+    // }
+    // for (var i = 0; i < announcements.length; i++) {
+    //   if (announcements[i].category === category) {
+    //   }
+    // }
+  }
 
   return (
     <>
@@ -60,10 +90,10 @@ function App() {
           Club Announcement Board
         </a>
       </div>
-      <div>
-        <label for = "club-categories">Filter by Category:</label>
+      {/* <div>
+        <label htmlFor="club-categories">Filter by Category:</label>
       </div>
-      <select id = "club-categories" onChange={handleSelectCategory}>
+      <select id="club-categories" onChange={handleSelectCategory}>
         <option></option>
         <option value="academic">Academic</option>
         <option value="activism">Activism</option>
@@ -73,10 +103,23 @@ function App() {
         <option value="sports">Sports</option>
         <option value="volunteering">Volunteering</option>
         <option value="other">Other</option>
-      </select>
-      <Container>
-        <Announcements announcements={announcements} />
-      </Container>
+      </select> */}
+
+      <Box width="75%" margin="auto">
+        <Flex justifyContent="space-around">
+          <Box>
+            <Announcements announcements={announcementsToDisplay} />
+          </Box>
+          <Box width="30%">
+            <MultiSelect
+              options={options}
+              value={tags}
+              onChange={setTags}
+              labelledBy="Filter by Category:"
+            />
+          </Box>
+        </Flex>
+      </Box>
     </>
   );
 };
