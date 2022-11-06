@@ -4,7 +4,7 @@ import Announcements from "./Announcements";
 import Announcement from "./Announcement";
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 
 import { Image, Container, Box, Flex, Heading } from "@chakra-ui/react";
 
@@ -14,6 +14,8 @@ import { Link } from 'react-router-dom'
 
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+
+import './Dashboard.css'
 
 const firebaseConfig = {
   apiKey: "AIzaSyBIfhZqi02ojiVSPNUkw3dsAeAuo59Kw88",
@@ -48,11 +50,12 @@ function Dashboard() {
 
   useEffect(() => {
     async function a() {
-      const querySnapshot = await getDocs(collection(db, "announcements"));
+      const q = query(collection(db, "announcements"), orderBy("time", "desc"), limit(100));
+      const querySnapshot = await getDocs(q);
 
       const announcementsRead = querySnapshot.docs.map((doc) => doc.data());
 
-      console.log(announcementsRead);
+      // console.log(announcementsRead);
 
       setAnnouncements(announcementsRead);
     }
@@ -63,7 +66,7 @@ function Dashboard() {
     let selected = announcements.filter((e) => {
         console.log(tags);
         for (let val of tags) {
-          console.log(val);
+          // console.log(val);
           if (val.value === e.type) return true;
         }
 
@@ -129,6 +132,7 @@ function Dashboard() {
         <Box marginTop="2em">
           <Announcements announcements={announcementsToDisplay} />
         </Box>
+        <Box h="30px"></Box>
       </Box>
     </>
   );
