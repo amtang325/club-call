@@ -6,11 +6,14 @@ import Announcement from "./Announcement";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 
-import { Image, Container, Box, Flex } from "@chakra-ui/react";
+import { Image, Container, Box, Flex, Heading } from "@chakra-ui/react";
 
 import MathBG from "./math.png";
 
-import { MultiSelect } from "react-multi-select-component";
+import { Link } from 'react-router-dom'
+
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBIfhZqi02ojiVSPNUkw3dsAeAuo59Kw88",
@@ -36,6 +39,8 @@ const options = [
   { label: "Other", value: "other" },
 ];
 
+const animatedComponents = makeAnimated();
+
 function Dashboard() {
   const [announcements, setAnnouncements] = useState([]);
   const [announcementsToDisplay, setAnnouncementsToDisplay] = useState([]);
@@ -55,18 +60,18 @@ function Dashboard() {
   }, []);
 
   useEffect(() => {
-    console.log(tags);
-    setAnnouncementsToDisplay(
-      announcements.filter((e) => {
+    let selected = announcements.filter((e) => {
         console.log(tags);
         for (let val of tags) {
           console.log(val);
-          if (val.value == e.type) return true;
+          if (val.value === e.type) return true;
         }
 
         return false;
-      })
-    );
+      }
+    )
+
+    setAnnouncementsToDisplay(selected);
   }, [announcements, tags]);
 
   const handleSelectCategory = () => {
@@ -81,11 +86,11 @@ function Dashboard() {
 
   return (
     <>
-      <div className="navigation-bar">
+      {/* <div className="navigation-bar">
         <a href="" id="club-list-tab">
           Club Announcement Board
         </a>
-      </div>
+      </div> */}
       {/* <div>
         <label htmlFor="club-categories">Filter by Category:</label>
       </div>
@@ -102,19 +107,28 @@ function Dashboard() {
       </select> */}
 
       <Box width="75%" margin="auto">
-        <Flex justifyContent="space-around">
-          <Box width="70%">
-            <Announcements announcements={announcementsToDisplay} />
-          </Box>
-          <Box width="30%">
-            <MultiSelect
+        <Box>
+          <Heading size="4xl">
+            <Link to="/">ClubCall</Link>
+          </Heading>
+        </Box>
+        <Box>
+          <Heading size="md" marginTop="1.5em">
+            Filter by Category:
+          </Heading>
+          <Box marginTop="0.5em">
+            <Select
               options={options}
               value={tags}
               onChange={setTags}
-              labelledBy="Filter by Category:"
+              components={animatedComponents}
+              isMulti
             />
           </Box>
-        </Flex>
+        </Box>
+        <Box marginTop="2em">
+          <Announcements announcements={announcementsToDisplay} />
+        </Box>
       </Box>
     </>
   );

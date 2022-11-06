@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import { Box, Heading, Center, Container, Button } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 
+import './Home.css'
 
 export default function Home() {
   return (
-    <Center h="100vh" w="100vw">
+    <Center h="100vh" w="vw">
       <Box w="75%">
         <Heading fontSize="9xl" marginLeft="-0.02em">
           ClubCall

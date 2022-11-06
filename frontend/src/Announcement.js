@@ -16,17 +16,19 @@ const badges = {
 export default function Announcement({ announcement }) {
     return (
       <Flex
-        maxW="lg"
         borderWidth="1px"
         borderRadius="7px"
         overflow="hidden"
-        style={{ backgroundColor: "rgb(188, 188, 252)" }}
+        style={{
+          backgroundColor: "rgba(214, 214, 255, 0.9)",
+          marginTop: "1.5em",
+        }}
         flexDirection="row"
         gap="0.5em"
         height="100px"
       >
         <Box>
-          <Image src={announcement.icon} style={{ height: '100px' }} />
+          <Image src={announcement.icon} style={{ height: "100px" }} />
         </Box>
         <Box>
           <Box>
@@ -37,11 +39,7 @@ export default function Announcement({ announcement }) {
             >
               {announcement.type}
             </Badge>
-            <Heading
-              as="h5"
-              size="sm"
-              marginTop="0.4em"
-            >
+            <Heading as="h5" size="sm" marginTop="0.4em">
               {announcement.name}
             </Heading>
           </Box>
