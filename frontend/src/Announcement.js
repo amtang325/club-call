@@ -40,11 +40,12 @@ export default function Announcement({ announcement }) {
             <Heading
               as="h5"
               size="sm"
+              marginTop="0.4em"
             >
               {announcement.name}
             </Heading>
           </Box>
-          <Box>{announcement.text}</Box>
+          <Box paddingRight="1em">{announcement.text}</Box>
         </Box>
       </Flex>
     );
