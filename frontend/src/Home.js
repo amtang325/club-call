@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { Box, Heading, Center, Container, Button } from '@chakra-ui/react'
+import { Box, Heading, Center, Button } from '@chakra-ui/react'
 import { ArrowForwardIcon } from '@chakra-ui/icons'
 
 import './Home.css'

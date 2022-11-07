@@ -1,14 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Announcements from "./Announcements";
-import Announcement from "./Announcement";
 
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs, query, orderBy, limit } from "firebase/firestore";
 
-import { Image, Container, Box, Flex, Heading } from "@chakra-ui/react";
-
-import MathBG from "./math.png";
+import { Box, Heading } from "@chakra-ui/react";
 
 import { Link } from 'react-router-dom'
 
@@ -76,16 +73,6 @@ function Dashboard() {
 
     setAnnouncementsToDisplay(selected);
   }, [announcements, tags]);
-
-  const handleSelectCategory = () => {
-    // var category = document.getElementById("club-categories").value;
-    // if (category === "") {
-    // }
-    // for (var i = 0; i < announcements.length; i++) {
-    //   if (announcements[i].category === category) {
-    //   }
-    // }
-  };
 
   return (
     <>
