@@ -7,7 +7,7 @@ import './Home.css'
 
 export default function Home() {
   return (
-    <Center h="100vh" w="vw">
+    <Center h="100vh" w="vw" style={{overflow:"hidden"}}>
       <Box w="75%">
         <Heading fontSize="9xl" marginLeft="-0.02em">
           ClubCall

@@ -96,7 +96,7 @@ function Dashboard() {
         <option value="other">Other</option>
       </select> */}
 
-      <Box width="75%" margin="auto">
+      <Box width="75%" margin="auto" marginTop="4em">
         <Box>
           <Heading size="4xl">
             <Link to="/">ClubCall</Link>
